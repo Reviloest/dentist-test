@@ -4,6 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class DentistVisitDTO {
@@ -12,7 +13,7 @@ public class DentistVisitDTO {
     String dentistName;
 
     @NotNull
-    @DateTimeFormat(pattern = "dd.MM.yyyy")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     Date visitTime;
 
     public DentistVisitDTO() {
