@@ -1,1 +1,3 @@
 # dentist-test
+
+## Time taken
