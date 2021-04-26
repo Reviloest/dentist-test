@@ -73,4 +73,8 @@ public class DentistVisitEntity {
     public String getEndHour() {
         return endHour;
     }
+
+    public Long getId() {
+        return id;
+    }
 }

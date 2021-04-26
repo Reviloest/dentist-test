@@ -60,4 +60,8 @@ public class DentistVisitService {
     public List<DentistVisitEntity> findAll() {
         return dentistVisitRepository.findAll();
     }
+
+    public void delete(Long id) {
+        dentistVisitRepository.delete(id);
+    }
 }

@@ -5,14 +5,14 @@ import com.cgi.dentistapp.entity.Dentist;
 import com.cgi.dentistapp.entity.DentistVisitEntity;
 import com.cgi.dentistapp.service.DentistService;
 import com.cgi.dentistapp.service.DentistVisitService;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -52,6 +52,14 @@ public class DentistAppController extends WebMvcConfigurerAdapter {
 
     @GetMapping("/booking")
     public String showBookings(Model model) {
+        List<DentistVisitEntity> visits = new ArrayList<>(dentistVisitService.findAll());
+        model.addAttribute("visits", visits);
+        return "booked";
+    }
+
+    @GetMapping("/booking/delete/{id}")
+    public String deleteBooking(@PathVariable(value = "id") Long id, Model model) {
+        dentistVisitService.delete(id);
         List<DentistVisitEntity> visits = new ArrayList<>(dentistVisitService.findAll());
         model.addAttribute("visits", visits);
         return "booked";
