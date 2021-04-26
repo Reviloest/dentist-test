@@ -4,24 +4,28 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 public class DentistVisitDTO {
 
+    @NotNull
     @Size(min = 1, max = 50)
     String dentistName;
 
     @NotNull
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    Date visitTime;
+    @Size(min = 1, max = 50)
+    String visitTime;
+
+    @NotNull
+    @Size(min = 1, max = 50)
+    String visitTimeHours;
 
     public DentistVisitDTO() {
     }
 
-    public DentistVisitDTO(String dentistName, Date visitTime) {
+    public DentistVisitDTO(String dentistName, String visitTime, String visitTimeHours) {
         this.dentistName = dentistName;
         this.visitTime = visitTime;
+        this.visitTimeHours = visitTimeHours;
     }
 
     public String getDentistName() {
@@ -32,11 +36,19 @@ public class DentistVisitDTO {
         this.dentistName = dentistName;
     }
 
-    public Date getVisitTime() {
+    public String getVisitTime() {
         return visitTime;
     }
 
-    public void setVisitTime(Date visitTime) {
+    public void setVisitTime(String visitTime) {
         this.visitTime = visitTime;
+    }
+
+    public String getVisitTimeHours() {
+        return visitTimeHours;
+    }
+
+    public void setVisitTimeHours(String visitTimeHours) {
+        this.visitTimeHours = visitTimeHours;
     }
 }
