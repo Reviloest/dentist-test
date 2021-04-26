@@ -2,6 +2,7 @@ package com.cgi.dentistapp.controller;
 
 import com.cgi.dentistapp.dto.DentistVisitDTO;
 import com.cgi.dentistapp.entity.Dentist;
+import com.cgi.dentistapp.entity.DentistVisitEntity;
 import com.cgi.dentistapp.service.DentistService;
 import com.cgi.dentistapp.service.DentistVisitService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,9 @@ import javax.validation.Valid;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @EnableAutoConfiguration
@@ -47,13 +50,17 @@ public class DentistAppController extends WebMvcConfigurerAdapter {
         registry.addViewController("/results").setViewName("results");
     }
 
+    @GetMapping("/booking")
+    public String showBookings(Model model) {
+        List<DentistVisitEntity> visits = new ArrayList<>(dentistVisitService.findAll());
+        model.addAttribute("visits", visits);
+        return "booked";
+    }
+
     @GetMapping("/")
     public String showRegisterForm(Model model) {
         List<String> dentistNames = dentistService.getNames();
         model.addAttribute("dentistNames", dentistNames);
-        for (String s: dentistService.getNames()) {
-            System.out.println(s);
-        }
         LocalDate date = LocalDate.now();
         model.addAttribute("currentDate", date);
         model.addAttribute("DentistVisitDTO", new DentistVisitDTO());
@@ -65,6 +72,7 @@ public class DentistAppController extends WebMvcConfigurerAdapter {
     public String postRegisterForm(@Valid DentistVisitDTO dentistVisitDTO, BindingResult bindingResult, Model model) {
             model.addAttribute("dentistList", dentistService.getNames());
             if (bindingResult.hasErrors()) {
+                System.out.println("target: " + bindingResult.getModel());
                 model.addAttribute("errors", true);
                 model.addAttribute("times", times);
                 return showRegisterForm(model);
@@ -73,9 +81,20 @@ public class DentistAppController extends WebMvcConfigurerAdapter {
                 if (!dentistVisitService.addVisit(dentistVisitDTO.getDentistName(),
                         dentistVisitDTO.getVisitTime(), dentistVisitDTO.getVisitTimeHours())) {
                     model.addAttribute("timeError", true);
-                    model.addAttribute("dateMsg", dentistVisitDTO.getVisitTime());
-                    model.addAttribute("timeMsg", dentistVisitDTO.getVisitTimeHours());
-                    model.addAttribute("timeErrorName", dentistVisitDTO.getDentistName());
+                    String errorStr = "Viga aja sisestamisel, arstil ";
+                    String dentistName = dentistVisitDTO.getDentistName();
+                    String visitTime = dentistVisitDTO.getVisitTime();
+                    String[] visitTimeConverted = visitTime.split("-");
+                    String visitTimeNew = visitTimeConverted[2] + "-" + visitTimeConverted[1] + "-" + visitTimeConverted[0];
+                    String visitTimeHours = dentistVisitDTO.getVisitTimeHours();
+                    errorStr += dentistName + " on juba registreering kuupäeval "
+                            + visitTimeNew + " ja kellaajal " + visitTimeHours
+                    + ":00";
+                    model.addAttribute("errorStr", errorStr);
+                    //model.addAttribute("dateMsg", dentistVisitDTO.getV
+                    // isitTime());
+                    //model.addAttribute("timeMsg", dentistVisitDTO.getVisitTimeHours());
+                    //model.addAttribute("timeErrorName", dentistVisitDTO.getDentistName());
                     return showRegisterForm(model);
                 }
             } catch (ParseException e) {

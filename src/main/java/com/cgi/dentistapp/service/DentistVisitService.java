@@ -37,31 +37,27 @@ public class DentistVisitService {
         convertedDate += date[0];
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         Date startDate = format.parse(convertedDate);
-        /*for (DentistVisitEntity e: dentistVisitRepository.findAll()) {
-            System.out.println(e.getDentistName().equals(dentistName));
-            System.out.println(format.parse(e.getDate()).equals(startDate));
-            System.out.println(e.getStartHour().equals(visitTimeHours));
-            System.out.println("1: " + e.getDentistName() + ", 2: " + dentistName);
-            System.out.println("1: " + format.parse(e.getDate()) + ", 2: " + startDate.toString());
-            System.out.println("1: " + e.getStartHour() + ", 2: " + visitTimeHours);
-        }*/
-            List<DentistVisitEntity> dentistVisitEntityList = dentistVisitRepository.findAll()
-                    .stream()
-                    .filter(x -> {
-                        try {
-                            return x.getDentistName().equals(dentistName) && format.parse(x.getDate()).equals(startDate)
-                                    && x.getStartHour().equals(visitTimeHours);
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                            return false;
-                        }
-                    })
-                    .collect(Collectors.toList());
-            if (dentistVisitEntityList.size() == 0) {
-                DentistVisitEntity dentistVisitEntity = new DentistVisitEntity(dentist, startDate, visitTimeHours);
-                dentistVisitRepository.save(dentistVisitEntity);
-                return true;
-            }
-            return false;
+        List<DentistVisitEntity> dentistVisitEntityList = dentistVisitRepository.findAll()
+                .stream()
+                .filter(x -> {
+                    try {
+                        return x.getDentistName().equals(dentistName) && format.parse(x.getDate()).equals(startDate)
+                                && x.getStartHour().equals(visitTimeHours);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                        return false;
+                    }
+                })
+                .collect(Collectors.toList());
+        if (dentistVisitEntityList.size() == 0) {
+            DentistVisitEntity dentistVisitEntity = new DentistVisitEntity(dentist, startDate, visitTimeHours);
+            dentistVisitRepository.save(dentistVisitEntity);
+            return true;
         }
+        return false;
     }
+
+    public List<DentistVisitEntity> findAll() {
+        return dentistVisitRepository.findAll();
+    }
+}

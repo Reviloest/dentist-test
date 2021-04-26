@@ -1,27 +1,43 @@
-<html>
+<!DOCTYPE HTML>
+<html lang="est">
+<head>
+    <link th:rel="stylesheet" th:href="@{assets/bootstrap-datepicker/css/bootstrap-datepicker.css}"/>
+    <link th:rel="stylesheet" th:href="@{assets/bootstrap-datepicker/css/bootstrap-datepicker.standalone.css}"/>
+    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{webjars/font-awesome/5.11.2/css/all.css} "/>
+</head>
 <body>
-<form action="#" th:action="@{/}" th:object="${dentistVisitDTO}" method="post">
+<form method="get" th:action="@{/booking}">
+    <button formmethod="get">Registreerimised</button>
+</form>
+<form method="post" th:action="@{/}" th:object="${DentistVisitDTO}">
     <table>
         <tr>
             <td><p th:text="#{dentist.name}">dentist.name</p></td>
-            <td><select name="dentistName">
-                <option th:each="dentistName : ${dentistList}" th:text="${dentistName}">
-                </option>
-            </select></td>
-            <td th:if="${#fields.hasErrors('dentistName')}" th:errors="*{dentistName}">name.error</td>
+            <td>
+                <label>
+                    <select th:field="*{dentistName}">
+                    <option th:each="dentistName : ${dentistNames}" th:text="${dentistName}" th:value="${dentistName}"></option>
+                    </select>
+                </label>
+            </td>
         </tr>
-        <!--
         <tr>
-            <td><p th:text="#{dentist.name}">dentist.name</p></td>
-            <td><input type="text" th:field="*{dentistName}"/></td>
-            <td th:if="${#fields.hasErrors('dentistName')}" th:errors="*{dentistName}">name.error</td>
+            <td><p th:text="#{visit.date}" th:attr="min=${currentDate}">visit.date</p></td>
+            <td><label for="regDate"></label><input type="date" id="regDate"
+                                                    th:attr="min=${currentDate}" th:field="*{visitTime}"/></td>
+            <td th:if="${errors}">Kuupäeva viga!</td>
         </tr>
-        -->
         <tr>
-            <td><p th:text="#{visit.date}">visit.date</p></td>
-            <td><label><input type="date" th:field="*{visitTime}"/>
-            </label></td>
-            <td th:if="${#fields.hasErrors('visitTime')}" th:errors="*{visitTime}">date.error</td>
+            <td><p th:text="#{visit.time}">visit.time</p></td>
+            <td>
+                <label>
+                    <select th:field="*{visitTimeHours}">
+                        <option th:each="time : ${times}" th:text="${time}" th:value="${time}"></option>
+                    </select>
+                </label>
+            </td>
+            <td><p th:if="${timeError}" th:text="${errorStr}"></p></td>
         </tr>
         <tr>
             <td>
@@ -30,5 +46,9 @@
         </tr>
     </table>
 </form>
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
 </body>
 </html>

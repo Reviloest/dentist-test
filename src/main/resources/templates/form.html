@@ -7,6 +7,9 @@
     <link th:rel="stylesheet" th:href="@{webjars/font-awesome/5.11.2/css/all.css} "/>
 </head>
 <body>
+<form method="get" th:action="@{/booking}">
+    <button formmethod="get">Registreerimised</button>
+</form>
 <form method="post" th:action="@{/}" th:object="${DentistVisitDTO}">
     <table>
         <tr>
@@ -23,7 +26,6 @@
             <td><p th:text="#{visit.date}" th:attr="min=${currentDate}">visit.date</p></td>
             <td><label for="regDate"></label><input type="date" id="regDate"
                                                     th:attr="min=${currentDate}" th:field="*{visitTime}"/></td>
-            <!--<td th:if="${errors}" th:errors="*{visitTime}">date.error</td>-->
             <td th:if="${errors}">Kuupäeva viga!</td>
         </tr>
         <tr>
@@ -35,6 +37,7 @@
                     </select>
                 </label>
             </td>
+            <td><p th:if="${timeError}" th:text="${errorStr}"></p></td>
         </tr>
         <tr>
             <td>
@@ -46,14 +49,6 @@
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-<script th:src="@{assets/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
-
-<script>
-    $('.input-group.date').datepicker({
-        autoclose: true,
-        todayHighlight: true
-    });
-</script>
 
 </body>
 </html>

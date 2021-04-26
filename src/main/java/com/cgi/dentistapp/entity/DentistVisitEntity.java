@@ -29,6 +29,9 @@ public class DentistVisitEntity {
     @NotNull
     private String startHour;
 
+    @NotNull
+    private String endHour;
+
     public DentistVisitEntity() {}
 
     public DentistVisitEntity(Dentist dentist, Date date, String startHour) {
@@ -36,6 +39,18 @@ public class DentistVisitEntity {
         this.date = date;
         this.dentistName = dentist.name;
         this.startHour = startHour;
+        if (startHour.charAt(1) == '9') {
+            String first = startHour.substring(0,1);
+            int firstVal = Integer.parseInt(first) + 1;
+            String firstAfter = String.valueOf(firstVal);
+            this.endHour = firstAfter + "0";
+        } else {
+            String first = startHour.substring(0,1);
+            String second = startHour.substring(1,2);
+            int secondVal = Integer.parseInt(second) + 1;
+            String secondAfter = String.valueOf(secondVal);
+            this.endHour = first + secondAfter;
+        }
     }
 
     public String getDate() {
@@ -53,5 +68,9 @@ public class DentistVisitEntity {
 
     public String getDentistName() {
         return dentistName;
+    }
+
+    public String getEndHour() {
+        return endHour;
     }
 }
