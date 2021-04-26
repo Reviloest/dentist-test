@@ -10,6 +10,8 @@ public class DentistVisitEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    //TODO implementation
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id")
+    private Dentist dentist;
 
 }
