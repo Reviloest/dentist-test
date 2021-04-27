@@ -1,5 +1,11 @@
 <html>
 <body>
 <p th:text="#{registration.ok}">registration.ok</p>
+<form method="get" th:action="@{/booking}">
+    <button formmethod="get">Registreerimised</button>
+</form>
+<form method="get" th:action="@{/}">
+    <button formmethod="get">Uus registreering</button>
+</form>
 </body>
 </html>
