@@ -4,11 +4,11 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class SearchDTO {
-    String dentistName;
+    String dentistName = null;
 
-    String visitTime;
+    String visitTime = null;
 
-    String visitTimeHours;
+    String visitTimeHours = null;
 
     public SearchDTO() {
     }

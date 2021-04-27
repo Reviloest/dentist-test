@@ -67,9 +67,13 @@ public class DentistAppController extends WebMvcConfigurerAdapter {
     }
 
     @PostMapping("booking/search")
-    public String search(SearchDTO searchDTO) {
-        System.out.println("HERE");
-        return null;
+    public String search(SearchDTO searchDTO, Model model) {
+        String dentistName = searchDTO.getDentistName();
+        String startDate = searchDTO.getVisitTime();
+        String startTime = searchDTO.getVisitTimeHours();
+        List<DentistVisitEntity> visits = dentistVisitService.searchByParameters(dentistName, startDate, startTime);
+        model.addAttribute("visits", visits);
+        return "booked";
     }
 
     @GetMapping("booking/search/redirect")
@@ -78,6 +82,7 @@ public class DentistAppController extends WebMvcConfigurerAdapter {
         LocalDate date = LocalDate.now();
         model.addAttribute("currentDate", date);
         model.addAttribute("SearchDTO", new SearchDTO());
+        model.addAttribute("times", times);
         return "search";
     }
 

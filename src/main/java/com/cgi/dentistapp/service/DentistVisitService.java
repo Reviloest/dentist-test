@@ -93,6 +93,28 @@ public class DentistVisitService {
         return false;
     }
 
+    public List<DentistVisitEntity> searchByParameters(String dentistName, String startDate, String startTime) {
+        String[] arrangedDate = startDate.split("-");
+        String startDateConv = arrangedDate[2] + "-" + arrangedDate[1] + "-" + arrangedDate[0];
+        System.out.println("START TIME: " + startTime);
+        System.out.println("START DATE: " + startDate);
+        for (DentistVisitEntity d: dentistVisitRepository.findAll()) {
+            System.out.println("TIME: " + d.getStartHour());
+            System.out.println("DATE: " + d.getDate());
+        }
+        // TODO: all cases here...
+        if (dentistName != null && startDate != null && startTime != null) {
+            return dentistVisitRepository
+                    .findAll()
+                    .stream()
+                    .filter(x -> x.getDentistName().equals(dentistName)
+                            && x.getDate().equals(startDateConv)
+                            && x.getStartHour().equals(startTime))
+                    .collect(Collectors.toList());
+        }
+        return null;
+    }
+
     public Dentist findDentistById(Long id) {
         Optional<Long> dentistId = dentistVisitRepository
                 .findAll()
