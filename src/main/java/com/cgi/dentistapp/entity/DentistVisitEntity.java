@@ -1,6 +1,7 @@
 package com.cgi.dentistapp.entity;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -8,6 +9,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "dentist_visits")
 public class DentistVisitEntity {
@@ -56,33 +59,5 @@ public class DentistVisitEntity {
     public String getDate() {
         DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         return format.format(date);
-    }
-
-    public Date getDateNoFormating() {
-        return date;
-    }
-
-    public String getStartHour() {
-        return startHour;
-    }
-
-    public String getDentistName() {
-        return dentistName;
-    }
-
-    public String getEndHour() {
-        return endHour;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Dentist getDentist() {
-        return dentist;
-    }
-
-    public Long getDentistId() {
-        return dentist.getDentist_id();
     }
 }

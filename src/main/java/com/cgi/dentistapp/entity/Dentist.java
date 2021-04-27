@@ -1,7 +1,12 @@
 package com.cgi.dentistapp.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "dentists")
 public class Dentist {
@@ -17,13 +22,5 @@ public class Dentist {
 
     public Dentist(String name) {
         this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Long getDentist_id() {
-        return dentist_id;
     }
 }

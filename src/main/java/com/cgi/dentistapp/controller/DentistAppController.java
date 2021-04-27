@@ -2,12 +2,9 @@ package com.cgi.dentistapp.controller;
 
 import com.cgi.dentistapp.dto.DentistVisitDTO;
 import com.cgi.dentistapp.dto.SearchDTO;
-import com.cgi.dentistapp.entity.Dentist;
 import com.cgi.dentistapp.entity.DentistVisitEntity;
 import com.cgi.dentistapp.service.DentistService;
 import com.cgi.dentistapp.service.DentistVisitService;
-import com.sun.org.apache.xpath.internal.operations.Mod;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
 import org.springframework.stereotype.Controller;
@@ -20,10 +17,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import javax.validation.Valid;
 import java.text.ParseException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @EnableAutoConfiguration
@@ -31,7 +25,7 @@ public class DentistAppController extends WebMvcConfigurerAdapter {
 
     private final DentistVisitService dentistVisitService;
     private final DentistService dentistService;
-    private List<String> times;
+    private final List<String> times;
 
     public DentistAppController(DentistVisitService dentistVisitService, DentistService dentistService) {
         this.dentistService = dentistService;
@@ -60,10 +54,14 @@ public class DentistAppController extends WebMvcConfigurerAdapter {
 
     @GetMapping("/booking/delete/{id}")
     public String deleteBooking(@PathVariable(value = "id") Long id, Model model) {
-        dentistVisitService.delete(id);
-        List<DentistVisitEntity> visits = new ArrayList<>(dentistVisitService.findAll());
-        model.addAttribute("visits", visits);
-        return "booked";
+        DentistVisitEntity exists = dentistVisitService.findVisitById(id);
+        if (exists != null) {
+            dentistVisitService.delete(id);
+            List<DentistVisitEntity> visits = new ArrayList<>(dentistVisitService.findAll());
+            model.addAttribute("visits", visits);
+            return "booked";
+        }
+        return "error";
     }
 
     @PostMapping("booking/search")
@@ -71,6 +69,15 @@ public class DentistAppController extends WebMvcConfigurerAdapter {
         String dentistName = searchDTO.getDentistName();
         String startDate = searchDTO.getVisitTime();
         String startTime = searchDTO.getVisitTimeHours();
+        if (dentistName.length() == 0) {
+            dentistName = null;
+        }
+        if (startTime.length() == 0) {
+            startTime = null;
+        }
+        if (startDate.length() == 0) {
+            startDate = null;
+        }
         List<DentistVisitEntity> visits = dentistVisitService.searchByParameters(dentistName, startDate, startTime);
         model.addAttribute("visits", visits);
         return "booked";

@@ -7,6 +7,12 @@
   <link th:rel="stylesheet" th:href="@{webjars/font-awesome/5.11.2/css/all.css} "/>
 </head>
 <body>
+<form method="get" th:action="@{/booking}">
+  <button formmethod="get">Registreerimised</button>
+</form>
+<form method="get" th:action="@{/}">
+  <button formmethod="get">Tee uus registreering</button>
+</form>
 <a href="booked.html"><form method="get" th:action="@{/booking}"></form></a>
 <form method="get" th:action="@{/booking/search/redirect}">
   <button formmethod="get">Täpsem otsing</button>
