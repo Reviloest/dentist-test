@@ -29,6 +29,41 @@ public class DentistVisitService {
         this.dentistRepository = dentistRepository;
     }
 
+    public boolean changeVisit(String dentistName, String visitTime, String visitTimeHours, Long id) throws ParseException {
+        Dentist dentist = dentistRepository.findAll().stream().filter(x -> x.getName().equals(dentistName)).collect(Collectors.toList()).get(0);
+        String[] date = visitTime.split("-");
+        String convertedDate = "";
+        convertedDate += date[2] + "-";
+        convertedDate += date[1] + "-";
+        convertedDate += date[0];
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        Date startDate = format.parse(convertedDate);
+        List<DentistVisitEntity> dentistVisitEntityList = dentistVisitRepository.findAll()
+                .stream()
+                .filter(x -> {
+                    try {
+                        return x.getDentistName().equals(dentistName) && format.parse(x.getDate()).equals(startDate)
+                                && x.getStartHour().equals(visitTimeHours);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                        return false;
+                    }
+                })
+                .collect(Collectors.toList());
+        if (dentistVisitEntityList.size() == 0) {
+            Optional<DentistVisitEntity> dentistVisitEntityOld = dentistVisitRepository.findAll().stream().filter(x -> x.getId().equals(id)).findFirst();
+            if (dentistVisitEntityOld.isPresent()) {
+                DentistVisitEntity dentistVisitEntityOldObject = dentistVisitEntityOld.get();
+                dentistVisitRepository.delete(dentistVisitEntityOldObject);
+                DentistVisitEntity newDentistVisit = new DentistVisitEntity(dentist, startDate, visitTimeHours);
+                dentistVisitRepository.save(newDentistVisit);
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
+
     public boolean addVisit(String dentistName, String visitTime, String visitTimeHours) throws ParseException {
         Dentist dentist = dentistRepository.findAll().stream().filter(x -> x.getName().equals(dentistName)).collect(Collectors.toList()).get(0);
         String[] date = visitTime.split("-");
