@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -57,11 +58,43 @@ public class DentistVisitService {
         return false;
     }
 
+    public Dentist findDentistById(Long id) {
+        Optional<Long> dentistId = dentistVisitRepository
+                .findAll()
+                .stream()
+                .map(DentistVisitEntity::getDentistId)
+                .filter(xDentistId -> xDentistId.equals(id))
+                .collect(Collectors.toList()).stream().findAny();
+        if (dentistId.isPresent()) {
+            Optional<Dentist> dentist = dentistRepository
+                    .findAll()
+                    .stream()
+                    .filter(x -> x.getDentist_id()
+                            .equals(dentistId.get())).collect(Collectors.toList())
+                    .stream()
+                    .findFirst();
+            return dentist.orElse(null);
+        }
+        return null;
+    }
+
     public List<DentistVisitEntity> findAll() {
         return dentistVisitRepository.findAll();
     }
 
     public void delete(Long id) {
         dentistVisitRepository.delete(id);
+    }
+
+    public DentistVisitEntity findVisitById(Long id) {
+        Optional<DentistVisitEntity> dentistVisitEntity = dentistVisitRepository
+                .findAll()
+                .stream()
+                .filter(x -> x.getId()
+                        .equals(id))
+                .collect(Collectors.toList())
+                .stream()
+                .findFirst();
+        return dentistVisitEntity.orElse(null);
     }
 }

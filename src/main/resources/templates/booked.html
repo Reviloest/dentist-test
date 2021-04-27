@@ -14,15 +14,16 @@
     <td>Registreerimise kuupäev</td>
     <td>Alguse kellaaeg</td>
     <td>Lõpu kellaaeg</td>
-    <td>Kustuta</td>
+    <td>Kustuta broneering</td>
+    <td>Muuda broneeringut</td>
   </tr>
   <tr th:each="visit: ${visits}" th:value="${visit}">
     <td th:text="${visit.dentistName}"></td>
     <td th:text="${visit.date}"></td>
     <td th:text="${visit.startHour + ':00'}"></td>
     <td th:text="${visit.endHour + ':00'}"></td>
-    <td><a th:href="@{/booking/delete/{id}(id = ${visit.getId()})}">X</a>
-    </td>
+    <td><a th:href="@{/booking/delete/{id}(id = ${visit.getId()})}">O</a></td>
+    <td><a th:href="@{/booking/change/redirect/{id}(id = ${visit.getId()})}">O</a></td>
   </tr>
 </table>
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>

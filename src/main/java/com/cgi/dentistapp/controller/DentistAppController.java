@@ -65,6 +65,31 @@ public class DentistAppController extends WebMvcConfigurerAdapter {
         return "booked";
     }
 
+    @GetMapping("booking/change/redirect/{id}")
+    public String changeBookingRedirect(@PathVariable(value = "id") Long id, Model model) {
+        model.addAttribute("id", id);
+        DentistVisitEntity dentistVisitEntity = dentistVisitService.findVisitById(id);
+        String dentistName = dentistVisitEntity.getDentistName();
+        model.addAttribute("dentistName", dentistName);
+        String startDate = dentistVisitEntity.getDate();
+        model.addAttribute("startDate", startDate);
+        String startHour = dentistVisitEntity.getStartHour();
+        model.addAttribute("startHour", startHour);
+        String endHour = dentistVisitEntity.getEndHour();
+        model.addAttribute("endHour", endHour);
+        return "change";
+    }
+
+    @GetMapping("booking/change/{id}")
+    public String changeBooking(
+            @RequestParam(value = "dentistName", required = false) String dentistName,
+            @RequestParam(value = "startDate", required = false) String startDate,
+            @RequestParam(value = "startTime", required = false) String startTime,
+            @PathVariable(value = "id") Long id, Model model) {
+
+        return null;
+    }
+
     @GetMapping("/")
     public String showRegisterForm(Model model) {
         List<String> dentistNames = dentistService.getNames();

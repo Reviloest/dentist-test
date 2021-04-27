@@ -77,4 +77,12 @@ public class DentistVisitEntity {
     public Long getId() {
         return id;
     }
+
+    public Dentist getDentist() {
+        return dentist;
+    }
+
+    public Long getDentistId() {
+        return dentist.getDentist_id();
+    }
 }

@@ -23,7 +23,7 @@ public class Dentist {
         return name;
     }
 
-    public long getDentist_id() {
+    public Long getDentist_id() {
         return dentist_id;
     }
 }
