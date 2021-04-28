@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html lang="est">
+<head>
+  <title>Registreeri hambaarsti visiidile</title>
+  <meta charset="utf-8"/>
+  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" rel="stylesheet"/>
+  <link th:href="@{/css/stylesheet.css}" rel="stylesheet"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+</head>
+<body>
+
+<nav class="navbar navbar-expand main-navbar">
+  <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarMenu">
+    <ul class="navbar-nav">
+      <li class="nav-item m-3">
+        <form method="get" th:action="@{/}">
+          <button formmethod="get" class="btn btn-primary">Registreeri uus visiit</button>
+        </form>
+      </li>
+      <li class="nav-item m-3">
+        <form method="get" th:action="@{/booking}">
+          <button formmethod="get" class="btn btn-primary">Kõik visiidid</button>
+        </form>
+      </li>
+      <li class="nav-item m-3">
+        <form method="get" th:action="@{/booking/search/redirect}">
+          <button formmethod="get" class="btn btn-primary">Täpsem otsing</button>
+        </form>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+<div class="container">
+  <div class="row mt-3 mb-3">
+    <div class="col-6 table-header">
+      <h1>Õpetus</h1>
+      <p class="text-class-sm">Kui tahad uut visiiti registreerida, siis vali ülevalt menüüst "Registreeri uus visiit".
+        Järgnevalt avaneb vaade, kust saate uue visiidi registreerida. Selleks vali arsti nimi saadavast
+        nimekirjast, vali endale sobiv kuupäev ning vali ka kellaaeg ning vajuta nupule "Registreeri visiidile".
+        08 tähendab et visiit algab kell 08:00 ja lõpeb 09:00. Kõik visiidid kestavad 1 tund.
+        Kui arvad et läheb kauem kui 1 tund, siis pead ka teise visiidi registreerima peale seda. Kui jätad kuupäeva
+        välja tühjaks, ilmub veateade. Kui vastaval arstil on juba visiit sellel kuupäeval ja kellaajal, saate vastava
+        veateate.</p>
+      <p class="text-class-sm">Kui tahad vaadata kõiki visiite, vali ülevalt menüüst "Kõik visiidid".
+        Avaneb tabeli vaade kõikidest olemasolevatest visiitidest. Kui tahad aga vaadata kindlaid visiite,
+        siis vali ülevalt menüüst "Täpsem otsing". Avaneb täpsema otsingu vaade. Tegemist on mittekohustuslikude
+        väljadega, ehk saad mõned (või kõik) väljad tühjaks jätta. Kui jätad kõik väljad tühjaks siis tulemus
+        on tühi. Kui paned kellaajaks 08 ja jätad teised väljad tühjaks ning vajutad nuppu "Otsi visiite" siis
+        järgnevalt ilmuvad kõik visiidid, mis algavad kellajal 08:00. Kui paned nüüd samale kellaajale lisaks
+        ka arsti nime, näiteks "Kuusk" ja vajutad nuppu "Otsi visiite", siis järgenavalt ilmuvad visiidid,
+        mis on tehtud arstile "Kuusk" kellaajal 08:00.</p>
+        <p class="text-class-sm">Järgnev käib visiidi kusutamise kohta. Sinna saad kui valid ülevalt menüüst
+        "Kõik visiidid" või "Täpsem otsing" (täpsema otsingu puhul tuleb otsing teha). Kusutamiseks
+        otsi visiit, mida tahad kustutada ning mine hiirega "X" peale ning vajuta. Ilmub uus vaade teatega
+        "Visiit kustutatud".</p>
+      <p class="text-class-sm">Järgnev käib visiidi muutmise kohta. Sinna saad kui valid ülevalt menüüst
+        "Kõik visiidid" või "Täpsem otsing" (täpsema otsingu puhul tuleb otsing teha). Muutmiseks
+        otsi visiit, mida tahad muuta ning mine hiirega "Muuda visiiti" peale. Avaneb uus vaade, millega
+        saate visiiti muuta. Saate muuta nii arsti, kuupäeva kui ka kellaaega. Juhul kui uuel arstil on juba
+        visiit teie valitud kellaajal, ilmub veateade. Kui jätate kuupäeva lahtri tühjaks, ilmub samuti
+        veateade.</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
