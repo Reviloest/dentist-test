@@ -40,7 +40,7 @@ Laadi kood alla, installi Maven depencency-d. Mine DentistAppApplication-i alla 
 
 * Tahad uut visiiti registreerida - alguses avanebki see vaade. Kui olete mujal siis see vaade avaneb "Registreeri visiit" alt ülevalt menüüst. Siin saate uue registreerimise teha.
 * Tahad vaadata kõiki visiite - ülevalt menüüst "Kõik visiidid" alt.
-* Tahad kindlat visiite vaadata - ülevalt menüüst "Täpsem otsing" alt.
+* Tahad kindlaid visiite vaadata - ülevalt menüüst "Täpsem otsing" alt. Otsingu loogika on "Üksipulgi lahtikirjutatud kasutusjuhend"-i peatüki 2.1 all kirjas.
 * Tahad muuta visiiti - ülevalt menüüst "Kõik visiidid" või "Täpsem otsing" alt -> otsi üles visiit mida tahad muuta -> "Muuda" peal vajutada. Avaneb aken, kust saad visiidi andmeid muuta.
 * Tahad kustutada visiiti - ülevalt menüüst "Kõik visiidid" või "Täpsem otsing" alt -> otsi üles visiit mida tahad kustutada -> "X" peal vajutada. Avaneb aken, kus on tulemus kirjas.
 
@@ -48,6 +48,7 @@ Laadi kood alla, installi Maven depencency-d. Mine DentistAppApplication-i alla 
 
 ### Üksipulgi lahtikirjutatud kasutusjuhend:
 
+        1.0 
         Kui tahad uut visiiti registreerida, siis vali ülevalt menüüst "Registreeri uus visiit".
         Järgnevalt avaneb vaade, kust saate uue visiidi registreerida. Selleks vali arsti nimi saadavast
         nimekirjast, vali endale sobiv kuupäev ning vali ka kellaaeg ning vajuta nupule "Registreeri visiidile".
@@ -55,18 +56,23 @@ Laadi kood alla, installi Maven depencency-d. Mine DentistAppApplication-i alla 
         Kui arvad et läheb kauem kui 1 tund, siis pead ka teise visiidi registreerima peale seda. Kui jätad kuupäeva
         välja tühjaks, ilmub veateade. Kui vastaval arstil on juba visiit sellel kuupäeval ja kellaajal, saate vastava
         veateate.
+        2.0
         Kui tahad vaadata kõiki visiite, vali ülevalt menüüst "Kõik visiidid".
-        Avaneb tabeli vaade kõikidest olemasolevatest visiitidest. Kui tahad aga vaadata kindlaid visiite,
+        Avaneb tabeli vaade kõikidest olemasolevatest visiitidest.
+        2.1
+        Kui tahad aga vaadata kindlaid visiite,
         siis vali ülevalt menüüst "Täpsem otsing". Avaneb täpsema otsingu vaade. Tegemist on mittekohustuslikude
         väljadega, ehk saad mõned (või kõik) väljad tühjaks jätta. Kui jätad kõik väljad tühjaks siis tulemus
         on tühi. Kui paned kellaajaks 08 ja jätad teised väljad tühjaks ning vajutad nuppu "Otsi visiite" siis
         järgnevalt ilmuvad kõik visiidid, mis algavad kellajal 08:00. Kui paned nüüd samale kellaajale lisaks
         ka arsti nime, näiteks "Kuusk" ja vajutad nuppu "Otsi visiite", siis järgenavalt ilmuvad visiidid,
         mis on tehtud arstile "Kuusk" kellaajal 08:00.
+        3.0
         Järgnev käib visiidi kusutamise kohta. Sinna saad kui valid ülevalt menüüst
         "Kõik visiidid" või "Täpsem otsing" (täpsema otsingu puhul tuleb otsing teha). Kusutamiseks
         otsi visiit, mida tahad kustutada ning mine hiirega "X" peale ning vajuta. Ilmub uus vaade teatega
         "Visiit kustutatud".
+        4.0
         Järgnev käib visiidi muutmise kohta. Sinna saad kui valid ülevalt menüüst
         "Kõik visiidid" või "Täpsem otsing" (täpsema otsingu puhul tuleb otsing teha). Muutmiseks
         otsi visiit, mida tahad muuta ning mine hiirega "Muuda visiiti" peale. Avaneb uus vaade, millega
