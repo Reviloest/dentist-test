@@ -1,54 +1,88 @@
 <!DOCTYPE HTML>
 <html lang="est">
 <head>
-    <link th:rel="stylesheet" th:href="@{assets/bootstrap-datepicker/css/bootstrap-datepicker.css}"/>
-    <link th:rel="stylesheet" th:href="@{assets/bootstrap-datepicker/css/bootstrap-datepicker.standalone.css}"/>
-    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
-    <link th:rel="stylesheet" th:href="@{webjars/font-awesome/5.11.2/css/all.css} "/>
+    <title>Registreeri hambaarsti visiidile</title>
+    <meta charset="utf-8"/>
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+          integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" rel="stylesheet"/>
+    <link th:href="@{/css/stylesheet.css}" rel="stylesheet"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 </head>
 <body>
-<form method="get" th:action="@{/booking}">
-    <button formmethod="get">Registreerimised</button>
-</form>
+
+<nav class="navbar navbar-expand main-navbar">
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarMenu">
+        <ul class="navbar-nav">
+            <li class="nav-item m-3">
+                <form method="get" th:action="@{/booking}">
+                    <button formmethod="get" class="btn btn-primary">Registreerimised</button>
+                </form>
+            </li>
+            <li class="nav-item m-3">
+                <form method="get" th:action="@{/booking/search/redirect}">
+                    <button formmethod="get" class="btn btn-primary">Otsing</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row mt-3 mb-3">
+        <div class="col-6 table-header">
+            <x class="text-class">Uus registreering</x>
+        </div>
+    </div>
+</div>
+
 <form method="post" th:action="@{/}" th:object="${DentistVisitDTO}">
-    <table>
-        <tr>
-            <td><p th:text="#{dentist.name}">dentist.name</p></td>
-            <td>
-                <label>
-                    <select th:field="*{dentistName}">
-                    <option th:each="dentistName : ${dentistNames}" th:text="${dentistName}" th:value="${dentistName}"></option>
-                    </select>
-                </label>
-            </td>
-        </tr>
-        <tr>
-            <td><p th:text="#{visit.date}" th:attr="min=${currentDate}">visit.date</p></td>
-            <td><label for="regDate"></label><input type="date" id="regDate"
-                                                    th:attr="min=${currentDate}" th:field="*{visitTime}"/></td>
-            <td th:if="${errors}">Kuupäeva viga!</td>
-        </tr>
-        <tr>
-            <td><p th:text="#{visit.time}">visit.time</p></td>
-            <td>
-                <label>
-                    <select th:field="*{visitTimeHours}">
-                        <option th:each="time : ${times}" th:text="${time}" th:value="${time}"></option>
-                    </select>
-                </label>
-            </td>
-            <td><p th:if="${timeError}" th:text="${errorStr}"></p></td>
-        </tr>
-        <tr>
-            <td>
-                <button type="submit" th:text="#{register.visit}"></button>
-            </td>
-        </tr>
-    </table>
+    <div class="container ml-5 mr-5 mb-5 mt-1">
+        <table class="table table-striped">
+            <tr>
+                <th scope="row"></th>
+                <td><p th:text="#{dentist.name}">dentist.name</p></td>
+                <td>
+                    <label>
+                        <select th:field="*{dentistName}">
+                            <option th:each="dentistName : ${dentistNames}" th:text="${dentistName}"
+                                    th:value="${dentistName}"></option>
+                        </select>
+                    </label>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row"></th>
+                <td><p th:text="#{visit.date}" th:attr="min=${currentDate}">visit.date</p></td>
+                <td><label for="regDate"></label><input type="date" id="regDate"
+                                                        th:attr="min=${currentDate}" th:field="*{visitTime}"/></td>
+            </tr>
+            <tr>
+                <th scope="row"></th>
+                <td><p th:text="#{visit.time}">visit.time</p></td>
+                <td>
+                    <label>
+                        <select th:field="*{visitTimeHours}">
+                            <option th:each="time : ${times}" th:text="${time}" th:value="${time}"></option>
+                        </select>
+                    </label>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row"></th>
+                <td colspan="3">
+                    <button class="btn btn-secondary" type="submit" th:text="#{register.visit}"></button>
+                </td>
+            </tr>
+        </table>
+    </div>
 </form>
-<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<p th:if="${timeError}" th:text="${errorStr}"></p>
+<p th:if="${errors}">Kuupäeva viga!</p>
 
 </body>
 </html>

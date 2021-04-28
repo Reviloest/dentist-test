@@ -86,9 +86,6 @@ public class DentistVisitService {
     }
 
     public List<DentistVisitEntity> searchByParameters(String dentistName, String startDate, String startTime) {
-        System.out.println("name: " + dentistName);
-        System.out.println(startDate);
-        System.out.println(startTime);
         if (dentistName != null && startDate != null && startTime != null) {
             String[] arrangedDate = startDate.split("-");
             String startDateConv = arrangedDate[2] + "-" + arrangedDate[1] + "-" + arrangedDate[0];
