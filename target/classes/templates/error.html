@@ -1,11 +1,49 @@
-<html>
+<!DOCTYPE HTML>
+<html lang="est">
+<head>
+  <title>Vastavad visiidid</title>
+  <meta charset="utf-8"/>
+  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" rel="stylesheet"/>
+  <link th:href="@{/css/stylesheet.css}" rel="stylesheet"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+</head>
 <body>
-<form method="get" th:action="@{/booking}">
-  <button formmethod="get">Registreerimised</button>
-</form>
-<form method="get" th:action="@{/}">
-  <button formmethod="get">Uus registreering</button>
-</form>
-<p>Midagi läks valesti.</p>
+<nav class="navbar navbar-expand main-navbar">
+  <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarMenu">
+    <ul class="navbar-nav">
+      <li class="nav-item m-3">
+        <form method="get" th:action="@{/}">
+          <button formmethod="get" class="btn btn-primary">Registreeri ennast</button>
+        </form>
+      </li>
+      <li class="nav-item m-3">
+        <form method="get" th:action="@{/booking}">
+          <button formmethod="get" class="btn btn-primary">Kõik registreerimised</button>
+        </form>
+      </li>
+      <li class="nav-item m-3">
+        <form method="get" th:action="@{/booking/search/redirect}">
+          <button formmethod="get" class="btn btn-primary">Täpsem otsing</button>
+        </form>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="container">
+  <div class="row mt-2 mb-1">
+    <div class="col-6 table-header">
+      <p class="text-class">Midagi läks valesti</p>
+    </div>
+  </div>
+  <div class="row mt-1 mb-1">
+    <div class="col-6 table-header">
+      <p class="text-class-sm">Proovige uuesti</p>
+    </div>
+  </div>
+</div>
 </body>
 </html>

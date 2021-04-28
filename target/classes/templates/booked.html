@@ -1,40 +1,70 @@
 <!DOCTYPE HTML>
 <html lang="est">
 <head>
-  <link th:rel="stylesheet" th:href="@{assets/bootstrap-datepicker/css/bootstrap-datepicker.css}"/>
-  <link th:rel="stylesheet" th:href="@{assets/bootstrap-datepicker/css/bootstrap-datepicker.standalone.css}"/>
-  <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
-  <link th:rel="stylesheet" th:href="@{webjars/font-awesome/5.11.2/css/all.css} "/>
+    <title>Vastavad visiidid</title>
+    <meta charset="utf-8"/>
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+          integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" rel="stylesheet"/>
+    <link th:href="@{/css/stylesheet.css}" rel="stylesheet"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 </head>
 <body>
-<form method="get" th:action="@{/booking}">
-  <button formmethod="get">Registreerimised</button>
-</form>
-<form method="get" th:action="@{/}">
-  <button formmethod="get">Tee uus registreering</button>
-</form>
-<a href="booked.html"><form method="get" th:action="@{/booking}"></form></a>
-<form method="get" th:action="@{/booking/search/redirect}">
-  <button formmethod="get">Täpsem otsing</button>
-</form>
-<table>
-  <tr>
-    <td>Nimi</td>
-    <td>Registreerimise kuupäev</td>
-    <td>Alguse kellaaeg</td>
-    <td>Lõpu kellaaeg</td>
-    <td>Kustuta broneering</td>
-    <td>Muuda broneeringut</td>
-  </tr>
-  <tr th:each="visit: ${visits}" th:value="${visit}">
-    <td th:text="${visit.dentistName}"></td>
-    <td th:text="${visit.date}"></td>
-    <td th:text="${visit.startHour + ':00'}"></td>
-    <td th:text="${visit.endHour + ':00'}"></td>
-    <td><a th:href="@{/booking/delete/{id}(id = ${visit.getId()})}">Kustuta</a></td>
-    <td><a th:href="@{/booking/change/redirect/{id}(id = ${visit.getId()})}">Muuda</a></td>
-  </tr>
-</table>
+
+<nav class="navbar navbar-expand main-navbar">
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarMenu">
+        <ul class="navbar-nav">
+            <li class="nav-item m-3">
+                <form method="get" th:action="@{/}">
+                    <button formmethod="get" class="btn btn-primary">Registreeri ennast</button>
+                </form>
+            </li>
+            <li class="nav-item m-3">
+                <form method="get" th:action="@{/booking}">
+                    <button formmethod="get" class="btn btn-primary">Kõik registreerimised</button>
+                </form>
+            </li>
+            <li class="nav-item m-3">
+                <form method="get" th:action="@{/booking/search/redirect}">
+                    <button formmethod="get" class="btn btn-primary">Täpsem otsing</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row mt-3 mb-3">
+        <div class="col-6 table-header">
+            <x class="text-class">Vastavad visiidid</x>
+        </div>
+    </div>
+</div>
+
+<div class="container ml-5 mr-5 mb-5 mt-1">
+    <table class="table table-striped">
+        <tr>
+            <th scope="row"></th>
+            <td>Nimi</td>
+            <td>Registreerimise kuupäev</td>
+            <td>Alguse kellaaeg</td>
+            <td>Lõpu kellaaeg</td>
+            <td>Kustuta broneering</td>
+            <td>Muuda broneeringut</td>
+        </tr>
+        <tr th:each="visit: ${visits}" th:value="${visit}">
+            <th scope="row"></th>
+            <td th:text="${visit.dentistName}"></td>
+            <td th:text="${visit.date}"></td>
+            <td th:text="${visit.startHour + ':00'}"></td>
+            <td th:text="${visit.endHour + ':00'}"></td>
+            <td><a th:href="@{/booking/delete/{id}(id = ${visit.getId()})}">X</a></td>
+            <td><a th:href="@{/booking/change/redirect/{id}(id = ${visit.getId()})}">Muuda</a></td>
+        </tr>
+    </table>
+</div>
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
