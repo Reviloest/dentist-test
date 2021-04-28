@@ -38,9 +38,13 @@ Laadi kood alla, installi Maven depencency-d. Mine DentistAppApplication-i alla 
 
 #### Lihtne kasutusjuhend
 
+* Tahad uut visiiti registreerida - alguses avanebki see vaade. Kui olete mujal siis see vaade avaneb "Registreeri visiit" alt ülevalt menüüst. Siin saate uue registreerimise teha.
+* Tahad vaadata kõiki visiite - ülevalt menüüst "Kõik visiidid" alt.
+* Tahad kindlat visiite vaadata - ülevalt menüüst "Täpsem otsing" alt.
+* Tahad muuta visiiti - ülevalt menüüst "Kõik visiidid" või "Täpsem otsing" alt -> otsi üles visiit mida tahad muuta -> "Muuda" peal vajutada. Avaneb aken, kust saad visiidi andmeid muuta.
+* Tahad kustutada visiiti - ülevalt menüüst "Kõik visiidid" või "Täpsem otsing" alt -> otsi üles visiit mida tahad kustutada -> "X" peal vajutada. Avaneb aken, kus on tulemus kirjas.
 
-
-Juhul kui on tahtmist/vajadust täpsemateks juhisteks, siis all on pikk ja lahtikirjutatud kasutusjuhend.
+* Juhul kui on tahtmist/vajadust täpsemateks juhisteks, siis all on pikk ja lahtikirjutatud kasutusjuhend.
 
 ### Üksipulgi lahtikirjutatud kasutusjuhend:
 
