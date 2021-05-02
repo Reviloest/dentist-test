@@ -24,7 +24,7 @@
 
 ## Where I got stuck
 
-* I didn't know how I could send variables (objects, lists etc) along with Thymeleaf form. Quick Google search showed me that I had to declare Model model in controller and then I could use that to define variables. Took 10 mins.
+* I didn't know how I could send variables (objects, lists etc) along with Thymeleaf form. Quick Google search showed me that I had to declare Model model in controller and then I could use that to add variables into the form. Took 10 mins.
 
 * I don't understand why I couldn't retrieve date (object Date) from html date picker. Turns out it's actually string. This took me about 1h 30 min to fix. Tried googling but no help. Then it just clicked - it can't be a hard solution, gonna try a different data type - string and suddenly I got it working.
 
