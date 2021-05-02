@@ -16,6 +16,14 @@
 
 * Implementing - 10 hours
 
+* Total time - 12h 10 min
+
+## Where I got stuck
+
+* I didn't know how I could send variables (objects, lists etc) along with Thymeleaf form. Quick Google search showed me that I had to declare Model model in controller and then I could use that to define variables. Took 10 mins.
+
+* I don't understand why I couldn't retrieve date (object Date) from html date picker. Turns out it's actually string. This took me about 1h 30 min to fix. Tried googling but no help. Then it just clicked - it can't be a hard solution, gonna try a different data type - string and suddenly I got it working.
+
 ## What was hard
 
 Since most things were easy, I will just write what was hard instead
@@ -79,3 +87,7 @@ Laadi kood alla, installi Maven depencency-d. Mine DentistAppApplication-i alla 
         saate visiiti muuta. Saate muuta nii arsti, kuupäeva kui ka kellaaega. Juhul kui uuel arstil on juba
         visiit teie valitud kellaajal, ilmub veateade. Kui jätate kuupäeva lahtri tühjaks, ilmub samuti
         veateade.
+
+## Summary
+
+The solution didn't take too long. Could have taken less time but I wasn't familiar with Thymeleaf. Googled most of my problems. What really helped were my previous solution to another company (not one to one problem but similar) and my previous experiences with Spring Boot, MVC, H2 and so on. Also decided to add some basic Bootstrap to make it look nice and formal.
