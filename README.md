@@ -44,7 +44,7 @@ Since most things were easy, I will just write what was hard instead
 
 ### Paigaldusjuhend
 
-Laadi kood alla, installi Maven depencency-d. Mine DentistAppApplication-i alla ja real 16 vajuta rohelist noolt. Nüüd käivitub tomcat server ja minu loodud rakendus. Asub "localhost:8080/" all. Kui on tahtmist andmebaasi vaadata siis see asub "localhost:8080/console" all. UI on (minu arust) selge ja arusaadav ning intuitiivne. 
+Laadi kood alla, installi Maven depencency-d (Intellij-s tuleb kõigepealt indekseerimine ära oodata ja muud installeerimised. Peale seda mine pom.xml-i ja (kui on) siis vajuta aknas üleval paremal asuvat "M" tähte, kus on refresh ikoon. See ei pruugi vajalik olla). Mine DentistAppApplication-i alla (Intellij-s vasakul Project akna alla dentist-test -> src -> main -> java -> com.cgi.dentistapp -> DentistAppApplication) ja real 16 vajuta rohelist noolt. Nüüd käivitub tomcat server ja minu loodud rakendus. Asub "localhost:8080/" all. Kui on tahtmist andmebaasi vaadata siis see asub "localhost:8080/console" all. UI on (minu arust) selge ja arusaadav ning intuitiivne. 
 
 #### Lihtne kasutusjuhend
 

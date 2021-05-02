@@ -98,23 +98,27 @@ public class DentistAppController extends WebMvcConfigurerAdapter {
 
     @GetMapping("booking/change/redirect/{id}")
     public String changeBookingRedirect(@PathVariable(value = "id") Long id, Model model) {
-        model.addAttribute("id", id);
-        DentistVisitEntity dentistVisitEntity = dentistVisitService.findVisitById(id);
-        String dentistName = dentistVisitEntity.getDentistName();
-        model.addAttribute("dentistName", dentistName);
-        String startDate = dentistVisitEntity.getDate();
-        model.addAttribute("startDate", startDate);
-        String startHour = dentistVisitEntity.getStartHour();
-        model.addAttribute("startHour", startHour);
-        String endHour = dentistVisitEntity.getEndHour();
-        model.addAttribute("endHour", endHour);
-        model.addAttribute("id", id);
-        model.addAttribute("dentistNames", dentistService.getNames());
-        model.addAttribute("DentistVisitDTO", new DentistVisitDTO());
-        model.addAttribute("times", times);
-        LocalDate date = LocalDate.now();
-        model.addAttribute("currentDate", date);
-        return "change";
+        try {
+            model.addAttribute("id", id);
+            DentistVisitEntity dentistVisitEntity = dentistVisitService.findVisitById(id);
+            String dentistName = dentistVisitEntity.getDentistName();
+            model.addAttribute("dentistName", dentistName);
+            String startDate = dentistVisitEntity.getDate();
+            model.addAttribute("startDate", startDate);
+            String startHour = dentistVisitEntity.getStartHour();
+            model.addAttribute("startHour", startHour);
+            String endHour = dentistVisitEntity.getEndHour();
+            model.addAttribute("endHour", endHour);
+            model.addAttribute("id", id);
+            model.addAttribute("dentistNames", dentistService.getNames());
+            model.addAttribute("DentistVisitDTO", new DentistVisitDTO());
+            model.addAttribute("times", times);
+            LocalDate date = LocalDate.now();
+            model.addAttribute("currentDate", date);
+            return "change";
+        } catch (NullPointerException exception) {
+            return "error";
+        }
     }
 
     @PostMapping("booking/change/{id}")
@@ -128,23 +132,27 @@ public class DentistAppController extends WebMvcConfigurerAdapter {
         try {
             if (!dentistVisitService.changeVisit(dentistVisitDTO.getDentistName(),
                     dentistVisitDTO.getVisitTime(), dentistVisitDTO.getVisitTimeHours(), id)) {
-                model.addAttribute("timeError", true);
-                String errorStr = "Viga visiidi sisestamisel, arstil ";
-                String dentistName = dentistVisitDTO.getDentistName();
-                String visitTime = dentistVisitDTO.getVisitTime();
-                String[] visitTimeConverted = visitTime.split("-");
-                String visitTimeNew = visitTimeConverted[2] + "-" + visitTimeConverted[1] + "-" + visitTimeConverted[0];
-                String visitTimeHours = dentistVisitDTO.getVisitTimeHours();
-                errorStr += dentistName + " on juba visiit kuupäeval "
-                        + visitTimeNew + " ja kellaajal " + visitTimeHours
-                        + ":00. Vali mõni muu sobiv aeg.";
-                model.addAttribute("errorStr", errorStr);
-                return showRegisterForm(model);
+                return covertToError(dentistVisitDTO, model);
             }
         } catch (ParseException e) {
             e.printStackTrace();
         }
         return "redirect:/results";
+    }
+
+    private String covertToError(@Valid DentistVisitDTO dentistVisitDTO, Model model) {
+        model.addAttribute("timeError", true);
+        String errorStr = "Viga visiidi sisestamisel, arstil ";
+        String dentistName = dentistVisitDTO.getDentistName();
+        String visitTime = dentistVisitDTO.getVisitTime();
+        String[] visitTimeConverted = visitTime.split("-");
+        String visitTimeNew = visitTimeConverted[2] + "-" + visitTimeConverted[1] + "-" + visitTimeConverted[0];
+        String visitTimeHours = dentistVisitDTO.getVisitTimeHours();
+        errorStr += dentistName + " on juba visiit kuupäeval "
+                + visitTimeNew + " ja kellaajal " + visitTimeHours
+                + ":00. Vali mõni muu sobiv aeg.";
+        model.addAttribute("errorStr", errorStr);
+        return showRegisterForm(model);
     }
 
     @GetMapping("/")
@@ -170,18 +178,7 @@ public class DentistAppController extends WebMvcConfigurerAdapter {
             try {
                 if (!dentistVisitService.addVisit(dentistVisitDTO.getDentistName(),
                         dentistVisitDTO.getVisitTime(), dentistVisitDTO.getVisitTimeHours())) {
-                    model.addAttribute("timeError", true);
-                    String errorStr = "Viga visiidi sisestamisel, arstil ";
-                    String dentistName = dentistVisitDTO.getDentistName();
-                    String visitTime = dentistVisitDTO.getVisitTime();
-                    String[] visitTimeConverted = visitTime.split("-");
-                    String visitTimeNew = visitTimeConverted[2] + "-" + visitTimeConverted[1] + "-" + visitTimeConverted[0];
-                    String visitTimeHours = dentistVisitDTO.getVisitTimeHours();
-                    errorStr += dentistName + " on juba visiit kuupäeval "
-                            + visitTimeNew + " ja kellaajal " + visitTimeHours
-                    + ":00. Vali mõni muu sobiv aeg.";
-                    model.addAttribute("errorStr", errorStr);
-                    return showRegisterForm(model);
+                    return covertToError(dentistVisitDTO, model);
                 }
             } catch (ParseException e) {
                 e.printStackTrace();

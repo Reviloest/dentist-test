@@ -18,10 +18,6 @@ public class DentistService {
         this.dentistRepository = dentistRepository;
     }
 
-    public void addDentist(Dentist dentist) {
-        dentistRepository.save(dentist);
-    }
-
     public List<String> getNames() {
         List<String> names = new ArrayList<>();
         for (Dentist dentist: dentistRepository.findAll()) {
